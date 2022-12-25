@@ -28,9 +28,16 @@ function tmpBin(num, length) {
             if (isNaN(num))
                 break;
         }
-    } else
-        tmpbin = '0'.repeat(24 - length);
-    tmpbin += '0'.repeat(24 - length - tmpbin.length);
+    } else{
+        if (length > 24)
+            tmpbin = tmpbin.slice(0, 24);
+        else
+            tmpbin = '0'.repeat(24 - length);
+    }
+    if (length > 24)
+        tmpbin = tmpbin.slice(0, 24);
+    else
+        tmpbin += '0'.repeat(24 - length - tmpbin.length);
     return tmpbin;
 }
 
@@ -195,5 +202,6 @@ if (arg[3] === 'calc'){
     console.log(res);
 }else if (arg[3] === 'conv'){
     res = reform(Number(str));
+    res = res.slice(0, 32);
     console.log(res);
 }
